@@ -13,38 +13,54 @@ const items = [
         label: (
             <div className="min-w-[200px] m-2">
                 <Button className="w-full">
-                  <Link>Đơn đặt chỗ</Link>
+                    <Link>Đơn đặt chỗ</Link>
                 </Button>
                 <p className="my-2 cursor-default">Đăng nhập</p>
-                <Button className="w-full">Đăng nhập</Button>
+                <Button className="w-full">
+                    <Link to={configs.routes.login}>Đăng nhập</Link>
+                </Button>
                 <Button type="primary" className="my-2 w-full">
-                    Tạo tài khoản
+                    <Link to={configs.routes.register}>Tạo tài khoản</Link>
                 </Button>
             </div>
         ),
     },
 ];
 
+const navbars = [
+    { name: 'Trang chủ', link: configs.routes.home },
+    { name: 'Phòng', link: configs.routes.rooms },
+    { name: 'Tiện nghi', link: configs.routes.amenities },
+    { name: 'Ưu đãi', link: configs.routes.offers },
+    { name: 'Về chúng tôi', link: configs.routes.aboutUs },
+    { name: 'Liên hệ', link: configs.routes.contact },
+];
+
 function Header() {
     return (
-        <div className="w-full h-[60px] flex justify-between items-center px-10">
+        <div className="w-full h-[60px] flex justify-between items-center px-10 border-b-2">
             {/* logo */}
-            <Link to={configs.routes.home} className="h-full ">
+            <Link to={configs.routes.home} className="h-[70%] ">
                 <img src={logo} alt="logo" className="h-full" />
             </Link>
+
             {/* Thanh điều hướng */}
-            <div className="h-full flex items-center gap-6 ">
-                <Link to={configs.routes.home}>Home</Link>
-                <Link>Home</Link>
-                <Link>Home</Link>
-                <Link>Home</Link>
-                <Link>Home</Link>
-                <Link>Home</Link>
+            <div className="h-full flex items-center">
+                {navbars.map((navbar, index) => (
+                    <Link key={index}
+                        className="h-full px-3 border-b-2 border-transparent flex items-center hover:border-gray-500 transition-all"
+                        to={navbar.link}
+                    >
+                        {navbar.name}
+                    </Link>
+                ))}
             </div>
 
             {/* Tiện ích */}
             <div className="flex gap-6 text-[24px]">
-                <Link><FaOpencart className="cursor-pointer" /></Link>
+                <Link to={configs.routes.cart}>
+                    <FaOpencart className="cursor-pointer" />
+                </Link>
                 <Dropdown menu={{ items }} trigger={['click']} placement="bottomLeft" arrow>
                     <FaListUl className="cursor-pointer" />
                 </Dropdown>
