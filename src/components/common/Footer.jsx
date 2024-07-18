@@ -14,7 +14,7 @@ const socialNetworks = [
 
 function Footer() {
     return (
-        <div className="w-full flex justify-around bg-primary py-10 text-gray-300">
+        <div className="w-full flex justify-around bg-primary py-10 text-gray-300 snap-end">
             <Link to={configs.routes.home} className="w-[20%] max-w-[250px] flex items-center">
                 <img className="w-full rounded-tl-3xl rounded-br-3xl" src={logo} alt="logo" />
             </Link>

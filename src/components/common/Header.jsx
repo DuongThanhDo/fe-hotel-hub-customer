@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { FaListUl, FaOpencart } from 'react-icons/fa';
 import { Button, Dropdown } from 'antd';
 
-import logo from '../../assets/images/logo.png';
 import { configs } from '../../configs';
+import { assets } from '../../assets';
 
 const items = [
     {
@@ -38,10 +38,10 @@ const navbars = [
 
 function Header() {
     return (
-        <div className="w-full h-[60px] flex justify-between items-center px-10 border-b-2">
+        <div className="w-full h-[60px] flex justify-between items-center px-10 border-b-2 snap-start">
             {/* logo */}
             <Link to={configs.routes.home} className="h-[70%] ">
-                <img src={logo} alt="logo" className="h-full" />
+                <img src={assets.images.logo} alt="logo" className="h-full" />
             </Link>
 
             {/* Thanh điều hướng */}
