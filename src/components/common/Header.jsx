@@ -38,7 +38,7 @@ const navbars = [
 
 function Header() {
     return (
-        <div className="w-full h-[60px] flex justify-between items-center px-10 border-b-2 snap-start">
+        <div className="w-full h-[60px] flex justify-between items-center px-10 border-b-2 bg-white z-50">
             {/* logo */}
             <Link to={configs.routes.home} className="h-[70%] ">
                 <img src={assets.images.logo} alt="logo" className="h-full" />

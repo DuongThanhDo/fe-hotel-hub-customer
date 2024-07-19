@@ -34,7 +34,7 @@ const navbars = [
 function HomePage() {
     return (
         <div className="w-full text-3xl font-bold underline">
-            <div className="w-full h-[92.5vh] overflow-hidden snap-end ">
+            <div className="w-full h-[92.5vh] overflow-hidden">
             <img
                             className="w-full h-full object-cover object-center"
                             src={assets.images.aboutUs}
@@ -45,7 +45,7 @@ function HomePage() {
 
             <div>
                 {navbars.map((navbar, index) => (
-                    <div className="w-full h-[100vh] snap-center relative" key={index}>
+                    <div className="w-full h-[100vh] relative" key={index}>
                         <img
                             className="w-full h-full object-cover object-center blur-[2px] brightness-[.9]"
                             src={navbar.img}
