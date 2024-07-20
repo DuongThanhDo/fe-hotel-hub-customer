@@ -31,7 +31,6 @@ const navbars = [
     { name: 'Trang chủ', link: configs.routes.home },
     { name: 'Phòng', link: configs.routes.rooms },
     { name: 'Tiện nghi', link: configs.routes.amenities },
-    { name: 'Ưu đãi', link: configs.routes.offers },
     { name: 'Về chúng tôi', link: configs.routes.aboutUs },
     { name: 'Liên hệ', link: configs.routes.contact },
 ];
@@ -48,7 +47,7 @@ function Header() {
             <div className="h-full flex items-center">
                 {navbars.map((navbar, index) => (
                     <Link key={index}
-                        className="h-full px-3 border-b-2 border-transparent flex items-center hover:border-gray-500 transition-all"
+                        className="h-full px-3 border-b-2 border-transparent flex items-center hover:border-gray-500 hover:text-[#2389C9] transition-all"
                         to={navbar.link}
                     >
                         {navbar.name}

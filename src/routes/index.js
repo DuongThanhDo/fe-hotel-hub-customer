@@ -1,11 +1,10 @@
 import { configs } from '../configs';
-import { AboutUs, Amenities, Cart, Contact, HomePage, Login, Offers, Register, Rooms } from '../pages';
+import { AboutUs, Amenities, Cart, Contact, HomePage, Login, Register, Rooms } from '../pages';
 
 const publicRoutes = [
     { path: configs.routes.home, component: HomePage },
     { path: configs.routes.rooms, component: Rooms },
     { path: configs.routes.amenities, component: Amenities },
-    { path: configs.routes.offers, component: Offers },
     { path: configs.routes.aboutUs, component: AboutUs },
     { path: configs.routes.contact, component: Contact },
     { path: configs.routes.login, component: Login, layout: null },

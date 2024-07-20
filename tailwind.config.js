@@ -6,6 +6,9 @@ module.exports = {
             colors: {
                 primary: 'rgb(16, 24, 40)',
             },
+            scrollSnapType: {
+                y: 'scroll-snap-type: y mandatory;',
+            },
         },
     },
     plugins: [],

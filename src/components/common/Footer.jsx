@@ -24,7 +24,7 @@ function Footer() {
                 <p className="font-semibold text-[20px]">Thông tin liên hệ</p>
                 <li className="my-4">Địa chỉ: phường An Cựu Thành phố Huế</li>
                 <li>Số điện thoại: 0902207049</li>
-                <li className="my-4">Email: HoteldtdAgmail.com</li>
+                <li className="my-4">Email: Hoteldtd@gmail.com</li>
             </ul>
 
             {/* Mạng xã hội */}
