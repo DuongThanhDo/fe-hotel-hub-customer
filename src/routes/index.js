@@ -1,5 +1,5 @@
 import { configs } from '../configs';
-import { AboutUs, Amenities, Cart, Contact, HomePage, Login, Register, Rooms } from '../pages';
+import { AboutUs, Amenities, BookingForm, Cart, Contact, HomePage, Login, Register, Rooms } from '../pages';
 
 const publicRoutes = [
     { path: configs.routes.home, component: HomePage },
@@ -10,6 +10,7 @@ const publicRoutes = [
     { path: configs.routes.login, component: Login, layout: null },
     { path: configs.routes.register, component: Register, layout: null },
     { path: configs.routes.cart, component: Cart },
+    { path: configs.routes.bookingForm, component: BookingForm },
 ];
 
 export { publicRoutes };

@@ -6,5 +6,6 @@ export const routes = {
     contact: '/contact',
     login: '/login',
     register: '/register',
-    cart: '/cart'
+    cart: '/cart',
+    bookingForm: '/booking-form'
 };

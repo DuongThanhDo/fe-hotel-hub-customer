@@ -13,14 +13,14 @@ const items = [
         label: (
             <div className="min-w-[200px] m-2">
                 <Button className="w-full">
-                    <Link>Đơn đặt chỗ</Link>
+                    <Link className="w-full" to={configs.routes.bookingForm}>Đơn đặt chỗ</Link>
                 </Button>
                 <p className="my-2 cursor-default">Đăng nhập</p>
                 <Button className="w-full">
-                    <Link to={configs.routes.login}>Đăng nhập</Link>
+                    <Link className="w-full" to={configs.routes.login}>Đăng nhập</Link>
                 </Button>
                 <Button type="primary" className="my-2 w-full">
-                    <Link to={configs.routes.register}>Tạo tài khoản</Link>
+                    <Link className="w-full" to={configs.routes.register}>Tạo tài khoản</Link>
                 </Button>
             </div>
         ),

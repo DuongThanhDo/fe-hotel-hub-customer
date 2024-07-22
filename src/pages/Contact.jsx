@@ -11,7 +11,7 @@ function Contact() {
             <PageFrame img={assets.images.contact} name={'Liên hệ'}>
                 <div>
                     <div className="flex gap-[30px]">
-                        <div className="flex-2">
+                        <div>
                             <p className="py-4 text-[24px] text-[#2389C9]">Thông tin của liên hệ</p>
                             <p className="text-[#2389C9] font-black mb-3">_____</p>
                             <p>02 Lê Lợi, Thành phố Huế, Huế, Việt Nam</p>
