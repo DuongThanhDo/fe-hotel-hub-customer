@@ -3,20 +3,17 @@ import { Button, Checkbox, Input, Select } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { useLocation } from 'react-router-dom';
 import { assets } from '../assets';
-
-// connect api
-const apiRooms = [
-    { name: 'Phong vip', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 2', img: assets.images.rooms, type: '1 giuong doi & 1 giuong doi', price: '200000' },
-    { name: 'Phong 3', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 4', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 5', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 6', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 7', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 8', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-];
+import { useDispatch } from 'react-redux';
+import { addCart } from '../features/slices/cartSlice';
+import roomApi from '../features/apis/roomApi';
 
 const BookingForm = () => {
+    const dipatch = useDispatch();
+
+    const location = useLocation();
+    console.log(location);
+    const [rooms, setRooms] = useState([]);
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -24,15 +21,28 @@ const BookingForm = () => {
         checkin: '',
         checkout: '',
         guests: 1,
-        roomType: 'single',
+        roomType: '',
         paymentMethod: 'credit-card',
         terms: false,
     });
 
-    const location = useLocation();
-    console.log(location);
-
     useEffect(() => {
+        const fetchRooms = async () => {
+            try {
+                const roomsFromApi = await roomApi.getNonRepeatRoomType();
+                console.log(roomsFromApi, roomsFromApi[0].type);
+
+                setFormData({
+                    ...formData,
+                    roomType: roomsFromApi[0].type,
+                });
+                setRooms(roomsFromApi);
+            } catch (error) {
+                console.error('Có lỗi xảy ra khi lấy dữ liệu phòng:', error);
+            }
+        };
+
+        fetchRooms();
         if (location.state) {
             setFormData({
                 ...formData,
@@ -60,6 +70,11 @@ const BookingForm = () => {
         e.preventDefault();
         // Xử lý việc gửi form ở đây
         console.log(formData);
+    };
+
+    const handleAddCart = () => {
+        dipatch(addCart({ ...formData, paymentStatus: false }));
+        alert('Đã thêm vào giỏ hàng!');
     };
 
     return (
@@ -147,8 +162,10 @@ const BookingForm = () => {
                             onChange={(e) => handleChangeSelect(e, 'roomType')}
                             required
                         >
-                            {apiRooms.map((room, index) => (
-                                <option value={room.name}>{room.name}</option>
+                            {rooms.map((room, index) => (
+                                <option key={index} value={room.type}>
+                                    {room.type}
+                                </option>
                             ))}
                         </Select>
                     </div>
@@ -201,9 +218,12 @@ const BookingForm = () => {
                     Tôi đồng ý với các điều khoản và điều kiện
                 </label>
 
-                <Button className="float-end" type="primary" onClick={handleSubmit}>
-                    Đặt Phòng
-                </Button>
+                <div className="float-end">
+                    <Button onClick={handleAddCart}>Thêm vào giỏ hàng</Button>
+                    <Button className="ml-4" type="primary" onClick={handleSubmit}>
+                        Yêu cầu Đặt Phòng
+                    </Button>
+                </div>
             </form>
         </div>
     );

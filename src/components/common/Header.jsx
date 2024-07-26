@@ -3,29 +3,11 @@ import { Link } from 'react-router-dom';
 
 import { FaListUl, FaOpencart } from 'react-icons/fa';
 import { Button, Dropdown } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../features/slices/authSlice';
 
 import { configs } from '../../configs';
 import { assets } from '../../assets';
-
-const items = [
-    {
-        key: 0,
-        label: (
-            <div className="min-w-[200px] m-2">
-                <Button className="w-full">
-                    <Link className="w-full" to={configs.routes.bookingForm}>Đơn đặt chỗ</Link>
-                </Button>
-                <p className="my-2 cursor-default">Đăng nhập</p>
-                <Button className="w-full">
-                    <Link className="w-full" to={configs.routes.login}>Đăng nhập</Link>
-                </Button>
-                <Button type="primary" className="my-2 w-full">
-                    <Link className="w-full" to={configs.routes.register}>Tạo tài khoản</Link>
-                </Button>
-            </div>
-        ),
-    },
-];
 
 const navbars = [
     { name: 'Trang chủ', link: configs.routes.home },
@@ -36,6 +18,60 @@ const navbars = [
 ];
 
 function Header() {
+    const authState = useSelector((state) => state.auth);
+    console.log(authState);
+
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logoutUser());
+    };
+
+    const notLoggedIn = [
+        {
+            key: 0,
+            label: (
+                <div className="min-w-[200px] m-2">
+                    <Button className="w-full">
+                        <Link className="w-full" to={configs.routes.bookingForm}>
+                            Đơn đặt chỗ
+                        </Link>
+                    </Button>
+                    <p className="my-2 cursor-default">Đăng nhập</p>
+                    <Button className="w-full">
+                        <Link className="w-full" to={configs.routes.login}>
+                            Đăng nhập
+                        </Link>
+                    </Button>
+                    <Button type="primary" className="my-2 w-full">
+                        <Link className="w-full" to={configs.routes.register}>
+                            Tạo tài khoản
+                        </Link>
+                    </Button>
+                </div>
+            ),
+        },
+    ];
+    const logged = [
+        {
+            key: 0,
+            label: (
+                <div className="min-w-[200px] m-2">
+                    <Button className="w-full">
+                        <Link className="w-full" to={configs.routes.bookingForm}>
+                            Đơn đặt chỗ
+                        </Link>
+                    </Button>
+                    <Button className="w-full my-2" onClick={handleLogout}>
+                        <Link className="w-full" to={configs.routes.login}>
+                            Đăng xuất
+                        </Link>
+                    </Button>
+                </div>
+            ),
+        },
+    ];
+
     return (
         <div className="w-full h-[60px] flex justify-between items-center px-10 border-b-2 bg-white z-50">
             {/* logo */}
@@ -46,7 +82,8 @@ function Header() {
             {/* Thanh điều hướng */}
             <div className="h-full flex items-center">
                 {navbars.map((navbar, index) => (
-                    <Link key={index}
+                    <Link
+                        key={index}
                         className="h-full px-3 border-b-2 border-transparent flex items-center hover:border-gray-500 hover:text-[#2389C9] transition-all"
                         to={navbar.link}
                     >
@@ -60,8 +97,22 @@ function Header() {
                 <Link to={configs.routes.cart}>
                     <FaOpencart className="cursor-pointer" />
                 </Link>
-                <Dropdown menu={{ items }} trigger={['click']} placement="bottomLeft" arrow>
-                    <FaListUl className="cursor-pointer" />
+                <Dropdown
+                    menu={{ items: authState.isAuthenticated ? logged : notLoggedIn }}
+                    trigger={['click']}
+                    placement="bottomLeft"
+                    arrow
+                >
+                    {authState.isAuthenticated ? (
+                        <div className="w-[20px] h-[20px] overflow-hidden rounded-full cursor-pointer">
+                            <img
+                                src="https://i.pinimg.com/564x/4b/b2/bb/4bb2bb45bd21bb55053cebbd672b85f2.jpg"
+                                alt="avatar"
+                            />
+                        </div>
+                    ) : (
+                        <FaListUl className="cursor-pointer" />
+                    )}
                 </Dropdown>
             </div>
         </div>

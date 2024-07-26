@@ -1,10 +1,9 @@
 import React from 'react'
+import AuthFrame from '../components/AuthFrame'
 
 function Login() {
   return (
-    <div>
-      login
-    </div>
+    <AuthFrame login />
   )
 }
 

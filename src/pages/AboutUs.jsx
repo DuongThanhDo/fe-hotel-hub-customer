@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { assets } from '../assets';
 import PageFrame from '../components/common/PageFrame';
-
-// connect api
-const teams = [
-    { img: assets.images.aboutUs, name: 'Nguyen Van A', role: 'Quan ly', info: 'Thich ca hat' },
-    { img: assets.images.aboutUs, name: 'Nguyen Van A', role: 'Quan ly', info: 'Thich ca hat' },
-    { img: assets.images.aboutUs, name: 'Nguyen Van A', role: 'Quan ly', info: 'Thich ca hat' },
-    { img: assets.images.aboutUs, name: 'Nguyen Van A', role: 'Quan ly', info: 'Thich ca hat' },
-    { img: assets.images.aboutUs, name: 'Nguyen Van A', role: 'Quan ly', info: 'Thich ca hat' },
-    { img: assets.images.aboutUs, name: 'Nguyen Van A', role: 'Quan ly', info: 'Thich ca hat' },
-];
+import staffApi from '../features/apis/staffApi';
 
 function AboutUs() {
+    const [staffs, setStaffs] = useState([]);
+
+    useEffect(() => {
+        const fetchStaffs = async () => {
+            try {
+                const staffs = await staffApi.getAll();
+                console.log(staffs);
+                setStaffs(staffs);
+            } catch (error) {}
+        };
+
+        fetchStaffs();
+    }, []);
+
     return (
         <div>
             <PageFrame img={assets.images.aboutUs} name={'Về chúng tôi'}>
@@ -55,12 +60,20 @@ function AboutUs() {
                     <p className="py-5 text-[24px] text-[#2389C9] mt-20">Đội của chúng tôi</p>
                     <p className="text-[#2389C9] font-black mb-4">_____</p>
                     <div className="grid grid-cols-3 gap-8">
-                        {teams.map((team, index) => (
-                            <div key={index}>
-                                <img className="rounded-md" src={team.img} alt={team.name} />
-                                <p>{team.name}</p>
-                                <p>{team.role}</p>
-                                <p>{team.info}</p>
+                        {staffs.slice(0, 6).map((staff, index) => (
+                            <div key={index} className="p-5 bg-slate-100 rounded-lg">
+                                <div className="w-full h-[200px] overflow-hidden">
+                                    <img
+                                        className="rounded-md w-full h-full object-cover object-center"
+                                        src={'https://i.pinimg.com/564x/b9/05/ee/b905ee4c20c628207dd7f607f03fa556.jpg'}
+                                        alt="staff"
+                                    />
+                                </div>
+                                <p className="text-[18px] font-medium my-2">
+                                    {staff.profile ? staff.profile.name : 'noname'}
+                                </p>
+                                <p>Vị trí: {staff.staff.position}</p>
+                                <p>Quê quán: {staff.profile && staff.profile.address}</p>
                             </div>
                         ))}
                     </div>
