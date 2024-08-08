@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { FaListUl, FaOpencart } from 'react-icons/fa';
 import { Button, Dropdown } from 'antd';
@@ -17,7 +17,7 @@ const navbars = [
     { name: 'Liên hệ', link: configs.routes.contact },
 ];
 
-function Header() {
+function Header({ styles }) {
     const authState = useSelector((state) => state.auth);
     console.log(authState);
 
@@ -73,7 +73,7 @@ function Header() {
     ];
 
     return (
-        <div className="w-full h-[60px] flex justify-between items-center px-10 border-b-2 bg-white z-50">
+        <div className={`${styles} w-full h-[60px] flex justify-between items-center px-10 border-b-2 bg-white z-50`}>
             {/* logo */}
             <Link to={configs.routes.home} className="h-[70%] ">
                 <img src={assets.images.logo} alt="logo" className="h-full" />
@@ -82,13 +82,17 @@ function Header() {
             {/* Thanh điều hướng */}
             <div className="h-full flex items-center">
                 {navbars.map((navbar, index) => (
-                    <Link
+                    <NavLink
                         key={index}
-                        className="h-full px-3 border-b-2 border-transparent flex items-center hover:border-gray-500 hover:text-[#2389C9] transition-all"
+                        className={(nav) =>
+                            `${nav.isActive && 'text-[#2389C9]'}
+                            
+                            h-full px-3 border-b-2 border-transparent flex items-center hover:border-gray-500 hover:text-[#2389C9] transition-all`
+                        }
                         to={navbar.link}
                     >
                         {navbar.name}
-                    </Link>
+                    </NavLink>
                 ))}
             </div>
 

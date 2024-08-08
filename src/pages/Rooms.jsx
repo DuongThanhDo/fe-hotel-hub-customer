@@ -7,18 +7,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import roomApi from '../features/apis/roomApi';
 
-// connect api
-const apiRooms = [
-    { name: 'Phong vip', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 2', img: assets.images.rooms, type: '1 giuong doi & 1 giuong doi', price: '200000' },
-    { name: 'Phong 3', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 4', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 5', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 6', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 7', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-    { name: 'Phong 8', img: assets.images.rooms, type: '1 giuong doi', price: '200000' },
-];
-
 function Rooms() {
     const dispatch = useDispatch();
     const cartState = useSelector((state) => state.room);

@@ -12,7 +12,7 @@ const login = async (email, password) => {
     const data = { email, password };
     const url = '/customers/login';
 
-    const response = await axiosClient.post(url, data);
+    const response = await axiosClient.post(url, { ...data, web: 'customer' });
     return response;
 };
 

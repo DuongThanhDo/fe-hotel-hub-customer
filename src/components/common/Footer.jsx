@@ -12,9 +12,9 @@ const socialNetworks = [
     { icon: <FaInstagramSquare />, name: 'Instagram' },
 ];
 
-function Footer() {
+function Footer({ styles }) {
     return (
-        <div className="w-full flex justify-around bg-primary py-10 text-gray-300">
+        <div className={`${styles} w-full flex justify-around bg-primary py-10 text-gray-300`}>
             <Link to={configs.routes.home} className="w-[20%] max-w-[250px] flex items-center">
                 <img className="w-full rounded-tl-3xl rounded-br-3xl" src={logo} alt="logo" />
             </Link>

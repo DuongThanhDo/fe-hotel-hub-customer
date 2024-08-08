@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Button, Checkbox, Input } from 'antd';
+import { Button, Checkbox, Input, message } from 'antd';
 import { assets } from '../assets';
 import { configs } from '../configs';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
@@ -18,25 +18,30 @@ function AuthFrame({ login = false, register = false }) {
     const dispatch = useDispatch();
 
     const handleLogin = async () => {
-        const reponse = await authApi.login(inputEmail, inputPassword);
-        console.log(reponse);
-        if (reponse) {
-            dispatch(loginUser(reponse));
-            alert('Đăng nhập thành công!');
-            navigate('/');
+        try {
+            const reponse = await authApi.login(inputEmail, inputPassword);
+            console.log(reponse);
+            if (reponse) {
+                dispatch(loginUser(reponse));
+                message.success('Đăng nhập thành công!');
+                navigate('/');
+            }
+        } catch (error) {
+            message.error('Sai email hoặc mật khẩu');
+            console.log(error);
         }
     };
 
     const handleRegisret = async () => {
         const reponse = await authApi.register(inputUserName, inputEmail, inputPassword);
         console.log(reponse);
-        if (reponse && reponse === 'Email taken!') {
-            alert('Email đã tồn tại!')
+        if (reponse && typeof reponse === 'string') {
+            message.error(reponse);
         } else if (reponse) {
             setInputUserName('');
             setInputEmail('');
             setInputPassword('');
-            alert('Đăng ký thành công!');
+            message.success('Đăng ký thành công!');
         }
     };
 
